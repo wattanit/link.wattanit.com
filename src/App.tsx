@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import './App.css';
 import urls from './urls.json';
 
-function lookupUrl(path: string) {
-    if (path[0] === "/") {
+function lookupUrl(path: string): string{
+    if (path[0] === "/"){
         path = path.slice(1);
     }
 
@@ -15,7 +15,12 @@ function lookupUrl(path: string) {
     }
 }
 
+function isDevMode(path: string): boolean{
+    return path === "?dev";
+}
+
 function App() {
+    let isDev = isDevMode(window.location.search);
     let redirectUrl = lookupUrl(window.location.pathname);
 
     useEffect(() => {
@@ -24,11 +29,16 @@ function App() {
                 console.log("Short link not found: " + window.location.pathname);
                 redirectUrl = "https://wattanit.com";
                 console.log("Redirecting to " + redirectUrl);
-                window.location.replace(redirectUrl);
-            }else{
+                if (!isDev){
+                    window.location.replace(redirectUrl);
+                }
+            }
+            else{
                 console.log("Short link found: " + window.location.pathname);
                 console.log("Redirecting to " + redirectUrl);
-                window.location.replace(redirectUrl);
+                if (!isDev){
+                    window.location.replace(redirectUrl);
+                }
             }
         }
     }, []);
@@ -40,6 +50,7 @@ function App() {
             <span className={"Main"}>URL Shortener Service</span>
         </div>
         <p/>
+        {isDev && <div>Development mode: No redirection will occur</div>}
         <div>Current link {window.location.pathname}</div>
         <div>Redirecting to {redirectUrl}</div>
     </div>

@@ -27,10 +27,9 @@ function App() {
         return ()=>{
             if (redirectUrl === "Not found") {
                 console.log("Short link not found: " + window.location.pathname);
-                redirectUrl = "https://wattanit.com";
-                console.log("Redirecting to " + redirectUrl);
+                console.log("Redirecting to https://wattanit.com");
                 if (!isDev){
-                    window.location.replace(redirectUrl);
+                    window.location.replace("https://wattanit.com");
                 }
             }
             else{

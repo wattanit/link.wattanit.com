@@ -2,7 +2,7 @@
   "name": "link-shortener",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://wattanit.github.io/link.wattanit.com",
+  "homepage": "https://link.wattanit.com",
   "dependencies": {
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

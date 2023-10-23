@@ -63,7 +63,7 @@ function App() {
                 }
             }
         }
-    });
+    }, [urls]);
 
     return (
     <div className="App">

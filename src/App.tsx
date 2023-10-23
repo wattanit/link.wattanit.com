@@ -63,7 +63,7 @@ function App() {
                 }
             }
         }
-    }, [urls]);
+    }, [urls, redirectUrl]);
 
     return (
     <div className="App">

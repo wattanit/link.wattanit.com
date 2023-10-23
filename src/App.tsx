@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import urls from './urls.json';
 
@@ -42,28 +42,31 @@ function processUrl(url: string): inputUrl{
     };
 }
 
-function App() {
-    let urls = processUrl(window.location.search);
-    let redirectUrl = lookupUrl(urls.shortUrl);
+function delay(time: number) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
 
-    useEffect(() => {
-        return ()=>{
-            if (redirectUrl === "Not found") {
-                console.log("Short link not found: " + urls.shortUrl);
-                console.log("Redirecting to https://wattanit.com");
-                if (!urls.isDev){
-                    window.location.replace("https://wattanit.com");
-                }
-            }
-            else{
-                console.log("Short link found: " + urls.shortUrl);
-                console.log("Redirecting to " + redirectUrl);
-                if (!urls.isDev){
-                    window.location.replace(redirectUrl);
-                }
-            }
-        }
-    }, [urls, redirectUrl]);
+function App() {
+   let urls = processUrl(window.location.search);
+   let redirectUrl = lookupUrl(urls.shortUrl);
+   console.log(urls);
+
+   delay(2000).then(()=>{
+       if (redirectUrl === "Not found") {
+           console.log("Short link not found: " + urls.shortUrl);
+           console.log("Redirecting to https://wattanit.com");
+           if (!urls.isDev){
+               window.location.replace("https://wattanit.com");
+           }
+       }
+       else{
+           console.log("Short link found: " + urls.shortUrl);
+           console.log("Redirecting to " + redirectUrl);
+           if (!urls.isDev){
+               window.location.replace(redirectUrl);
+           }
+       }
+   })
 
     return (
     <div className="App">
